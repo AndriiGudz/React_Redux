@@ -27,6 +27,8 @@ const globalStyles = css`
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    align-items: center;
+    justify-content: center;
   }
 `
 function GlobalStyles() {

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled"
 
 export const FeedbackComponent = styled.div`
   display: flex;
@@ -17,4 +17,7 @@ export const Result = styled.div`
   min-width: 50px;
   font-size: 24px;
   font-weight: bold;
+`
+export const Icon = styled.img`
+  width: 60px;
 `
