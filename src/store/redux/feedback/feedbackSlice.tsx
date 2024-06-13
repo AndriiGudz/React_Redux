@@ -12,6 +12,7 @@ export const feedbackSlice = createAppSlice({
     reducers: create => ({
         like: create.reducer((state: FeedbackStateSlice) => {state.resultLike = state.resultLike + 1}),
         disLike: create.reducer((state: FeedbackStateSlice) => {state.resultDislike = state.resultDislike + 1}),
+        // reset: create.reducer(() => feedbackInitialState) - так можно вернуть исходные значения
         reset: create.reducer((state: FeedbackStateSlice) => {
             state.resultLike = 0
             state.resultDislike = 0
