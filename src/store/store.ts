@@ -3,9 +3,10 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { counterSlice } from "./redux/counter/counterSlice"
 import {feedbackSlice} from './redux/feedback/feedbackSlice'
 import { userSlice } from "./redux/userSlice/userSlice"
+import { randomJokesSlice } from "./redux/randomJokes/randomJokesSlice"
 
 
-const rootReducer = combineSlices(counterSlice, feedbackSlice, userSlice)
+const rootReducer = combineSlices(counterSlice, feedbackSlice, userSlice, randomJokesSlice)
 
 export type RootState = ReturnType<typeof rootReducer>
 
