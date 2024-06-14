@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom"
 import { LayoutProps } from "./types"
-import Logo from 'assets/free-logo.png'
+import Logo from "assets/free-logo.png"
 import {
   LayoutWrapper,
   Header,
@@ -18,7 +19,9 @@ function Layout({ children }: LayoutProps) {
     <LayoutWrapper>
       <Header>
         <HeaderLogoContainer>
-          <HeaderLogo src={Logo} />
+          <Link to="/">
+            <HeaderLogo src={Logo} />
+          </Link>
         </HeaderLogoContainer>
         <NavContainer>
           <StyledNavLink
