@@ -32,8 +32,13 @@ function Home() {
       [USERS_FORM_NAMES.JOB_TITLE]: "",
     } as UsersFormValues,
     validationSchema: schema,
-    onSubmit: values => {
-      dispatch(userSliceActions.addUser({ ...values, id: v4() }))
+    onSubmit: (values, helpers) => {
+      if (!!values.fullName && !!values.age && !!values.jobTitle) { // написание условие для проверки заполнености полей
+        dispatch(userSliceActions.addUser({ ...values, id: v4() }))
+        helpers.resetForm() // очищение формы
+      } else {
+        alert("Заполните все поля") // вызов алерта с уведомлением, что есть не заполненные поля
+      }
     },
   })
 
