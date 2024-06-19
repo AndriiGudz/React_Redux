@@ -5,6 +5,7 @@ import Homeworks15 from "homeworks/Homewroks15/Homeworks15"
 import Lessons15 from "lessons/Lessons15/Lessons15"
 import Lessons17 from "lessons/Lessons17/Lessons17"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Lessons18 from "lessons/Lessons18/Lessons18"
 
 const App = () => {
   return (
@@ -19,7 +20,8 @@ const App = () => {
 
       {/* <Lessons15 /> */}
       {/* <Homeworks15 /> */}
-      <Lessons17 />
+      {/* <Lessons17 /> */}
+      <Lessons18 />
     </BrowserRouter>
   )
 }
