@@ -15,17 +15,25 @@ export const weatherAppSlice = createAppSlice({
   reducers: create => ({
 
     fetchWeather: create.asyncThunk( async (citeName: string, thunkApi) => {
-      
-        const respons = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citeName}&appid=${APP_ID}`)
+      try {
+        const respons = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citeName}&appid=${APP_ID}&units=metric`)
         const result = await respons.json()
         console.log(result);
         
 
         if (!respons.ok) {
-          thunkApi.rejectWithValue(result)
+          thunkApi.rejectWithValue(result.message)
+        } 
+        return result
+      } catch (err) {
+        if (err instanceof Error) {
+          thunkApi.rejectWithValue(err.message)
         } else {
-          return result
+          thunkApi.rejectWithValue('Неизвестная ошибка')
         }
+      
+      }
+        
       },
       {
         pending: (state: WeatherAppSliceState) => {
@@ -34,10 +42,15 @@ export const weatherAppSlice = createAppSlice({
         },
         fulfilled: (state: WeatherAppSliceState, action: any) => {
             state.status = 'success'
+            const {main: {temp}, weather: [{icon, description}]} = action.payload // деструктаризация для удобства вытаскивания данных
             state.data = {
-              temperature: action.payload.main.temp,
+              temperature: action.payload.main.temp.toFixed(0), // погода сейчас, параметр .toFixed(0) - округляет значение до целого числа
+              temperatureFeels: action.payload.main.feels_like, // как ощущается погода
               names: action.payload.name,
-              icon: action.payload.weather.icon
+              // icon: action.payload.weather[0].icon,
+              // description: action.payload.weather[0].description // описание погоды
+              icon,
+              description
             }
         },
         rejected: (state: WeatherAppSliceState, action: any) => {

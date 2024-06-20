@@ -25,9 +25,10 @@ function WeatherApp() {
   const {data, status, error} = useAppSelector(weatherAppSliceSelector.weatherAppData)
   
   const [cityName, setCityName] = useState('') // для локального состояния
-  const [city, setCity] = useState('')
   
   const dispatch = useAppDispatch() // для глобального состояния
+
+  // Ввод данных в input с помощью Enter
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       dispatch(weatherAppSliceAction.fetchWeather(cityName))      
@@ -48,8 +49,8 @@ function WeatherApp() {
           <InputBox
             type="text"
             placeholder="Введите название города"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={cityName}
+            onChange={(e) => setCityName(e.target.value)}
             onKeyPress={handleKeyPress}
           />
           <BtnSearch onClick={getWeathers}>Получить погоду</BtnSearch>
