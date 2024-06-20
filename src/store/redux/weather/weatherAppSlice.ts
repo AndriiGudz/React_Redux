@@ -14,10 +14,12 @@ export const weatherAppSlice = createAppSlice({
   initialState,
   reducers: create => ({
 
-    getWeather: create.asyncThunk( async (citeName: string, thunkApi) => {
+    fetchWeather: create.asyncThunk( async (citeName: string, thunkApi) => {
       
         const respons = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citeName}&appid=${APP_ID}`)
         const result = await respons.json()
+        console.log(result);
+        
 
         if (!respons.ok) {
           thunkApi.rejectWithValue(result)
@@ -34,7 +36,8 @@ export const weatherAppSlice = createAppSlice({
             state.status = 'success'
             state.data = {
               temperature: action.payload.main.temp,
-              names: action.payload.name
+              names: action.payload.name,
+              icon: action.payload.weather.icon
             }
         },
         rejected: (state: WeatherAppSliceState, action: any) => {
@@ -49,5 +52,6 @@ export const weatherAppSlice = createAppSlice({
   }
 })
 
-export const weatherAppSliceAction = weatherAppSlice.actions
+export const {fetchWeather} = weatherAppSlice.actions // возможность экспортировать только конкретное действие (функцию). Это упращает синтаксис в основном компаненте.
+export const weatherAppSliceAction = weatherAppSlice.actions // экспортируем все Action
 export const weatherAppSliceSelector = weatherAppSlice.selectors

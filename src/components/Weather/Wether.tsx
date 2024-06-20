@@ -24,18 +24,18 @@ import { weatherAppSliceAction, weatherAppSliceSelector } from 'store/redux/weat
 function WeatherApp() {
   const {data, status, error} = useAppSelector(weatherAppSliceSelector.weatherAppData)
   
-  const [cityName, setCityName] = useState('')
+  const [cityName, setCityName] = useState('') // для локального состояния
   const [city, setCity] = useState('')
   
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch() // для глобального состояния
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      dispatch(weatherAppSliceAction.getWeather(cityName))      
+      dispatch(weatherAppSliceAction.fetchWeather(cityName))      
     }
   }
 
   const getWeathers = () => {
-    dispatch(weatherAppSliceAction.getWeather(cityName))
+    dispatch(weatherAppSliceAction.fetchWeather(cityName))
   }
 
   return (
@@ -64,10 +64,10 @@ function WeatherApp() {
               <Temperatur>{data?.temperature}°C</Temperatur>
               <CityName>{data.names}</CityName>
             </ContentBox>
-            {/* <IconBox
-              // src={`http://openweathermap.org/img/w/${data.}.png`}
+            <IconBox
+              src={`http://openweathermap.org/img/w/${data.icon}.png`}
               alt="weather icon"
-            /> */}
+            />
           </WeatherInfoBox>
         )}
       </WeatherBox>
